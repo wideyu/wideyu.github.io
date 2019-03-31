@@ -82,12 +82,12 @@ function getQueryVariable(variable)
 
 var lang = getQueryVariable("lang") || navigator.language || navigator.userLanguage; 
 var path = getQueryVariable("path");
-var url = 'https://bird.ioliu.cn/v2?url=http://m.kugou.com/app/i/fmSongs.php?fmid=3&offset=%7B%22offset%22%3A1553962840%7D&size=20'
+var url = 'https://bird.ioliu.cn/v2?url=http://m.kugou.com/app/i/fmList.php?pageindex=1&pagesize=99';
 var ul = document.getElementById('authors');
 var table = document.createElement('table');
     var tr = table.insertRow(-1);
     tr.innerHTML = "<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>";
-    tr.cells.item(0).innerHTML = 'sid';
+    tr.cells.item(0).innerHTML = 'fmid';
     tr.cells.item(1).innerHTML = 'fmname';
     tr.cells.item(2).innerHTML = 'classid';
     tr.cells.item(3).innerHTML = 'classname';
@@ -102,8 +102,8 @@ document.getElementById('time').innerHTML = "Loading ...";
 fetch(url).then(function (resp) {
   return resp.json();
 }).then(function (json) {
-    var len = json.data.songs.length;
-    console.log(json.status);
+    var len = json.data.length;
+    console.log(date.gettime);
     for (var i = 0; i < len; i++) {
         if (table.rows.length <= len) {
             tr = table.insertRow(-1);
@@ -111,7 +111,7 @@ fetch(url).then(function (resp) {
         }
         //var jsonStatus = JSON.parse(data[i].Status);
         tr = table.rows[i+1];
-        tr.cells.item(0).innerHTML = json.data.songs[i].sid;
+        tr.cells.item(0).innerHTML = json.data[i].fmid;
         tr.cells.item(1).innerHTML = json.data[i].fmname;
         tr.cells.item(2).innerHTML = json.data[i].classid;
         tr.cells.item(3).innerHTML = json.data[i].classname;
